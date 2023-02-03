@@ -13,38 +13,38 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CardTest {
 
 
- private ChromeDriver driver;
+    private ChromeDriver driver;
 
     @BeforeAll
-    static void setUpAll () {
+    static void setUpAll() {
         WebDriverManager.chromedriver().setup();
     }
 
 
-@BeforeEach
-void setUp () {
-    ChromeOptions options = new ChromeOptions();
-    options.addArguments("--disable-dev-shm-usage");
-    options.addArguments("--no-sandbox");
-    options.addArguments("--headless");
-    driver = new ChromeDriver(options);
-}
+    @BeforeEach
+    void setUp() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
+    }
 
-@AfterEach
-void tearDown () {
-    driver.quit ();
-    driver = null;
-}
+    @AfterEach
+    void tearDown() {
+        driver.quit();
+        driver = null;
+    }
 
-@Test
-void shouldTest1 () throws InterruptedException {
-    driver.get("http://localhost:9999/");
-    driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
-    driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79161111111");
-    driver.findElement(By.cssSelector("[data-test-id = agreement")).click();
-    driver.findElement(By.cssSelector("button")).click();
-    String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
-    String actual = driver.findElement(By.cssSelector("[data-test-id=order-success")).getText().trim();
-    assertEquals (expected,actual);
-}
+    @Test
+    void shouldTest1() {
+        driver.get("http://localhost:9999/");
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Иванов Иван");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79161111111");
+        driver.findElement(By.cssSelector("[data-test-id = agreement")).click();
+        driver.findElement(By.cssSelector("button")).click();
+        String expected = "Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.";
+        String actual = driver.findElement(By.cssSelector("[data-test-id=order-success")).getText().trim();
+        assertEquals(expected, actual);
+    }
 }
